@@ -1,5 +1,6 @@
 import requests
 from tkinter import *
+from tkinter import messagebox
 import tkinter as tk
 
 window = tk.Tk()
@@ -8,9 +9,12 @@ window.geometry("400x400")
 
 
 def chuck_joke():
-    response = requests.get("https://api.chucknorris.io/jokes/random")
-    data = response.json()
-    return data["value"]
+    try:
+        response = requests.get("https://api.chucknorris.io/jokes/random")
+        data = response.json()
+        return data["value"]
+    except:
+        messagebox.showerror("You're Offline", "Check your connection")
 
 
 joke = Message(window, text=chuck_joke())
